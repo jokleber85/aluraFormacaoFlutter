@@ -13,3 +13,5 @@ Persistência com Flutter: Crie um app com armazenamento interno (08 horas)</br>
 Flutter com web API: integrando sua app mobile (08 horas)</br>
 
 Comunicação HTTP: Flutter com web API (10 horas)</br>
+
+Firebase Crashlytics, gere relatórios de erro em tempo real (10 horas)</br>
