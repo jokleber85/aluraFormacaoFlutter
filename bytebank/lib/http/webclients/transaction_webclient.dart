@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'package:alura_crashlytics/http/webclient.dart';
 import 'package:alura_crashlytics/models/transaction.dart';
 import 'package:http/http.dart';
+import 'package:path/path.dart';
 
 class TransactionWebClient {
   Future<List<Transaction>> findAll() async {
     final Response response =
-        await client.get(baseUrl);
+        await client.get(Uri.parse(baseUrl));
     final List<dynamic> decodedJson = jsonDecode(response.body);
     return decodedJson
         .map((dynamic json) => Transaction.fromJson(json))
@@ -18,7 +19,7 @@ class TransactionWebClient {
     final String transactionJson = jsonEncode(transaction.toJson());
 
     await Future.delayed(Duration(seconds: 2));
-    final Response response = await client.post(baseUrl,
+    final Response response = await client.post(Uri.parse(baseUrl),
         headers: {
           'Content-type': 'application/json',
           'password': password,

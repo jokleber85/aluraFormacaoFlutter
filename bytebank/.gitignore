@@ -33,6 +33,7 @@
 
 # Web related
 lib/generated_plugin_registrant.dart
+android/app/google-services.json
 
 # Symbolication related
 app.*.symbols
@@ -40,7 +41,7 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# bytebank proj
-/bytebank-api/database/
-
-/android/app/google-services.json
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release

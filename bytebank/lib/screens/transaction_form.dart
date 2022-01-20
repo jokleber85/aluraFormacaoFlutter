@@ -6,7 +6,10 @@ import 'package:alura_crashlytics/components/transaction_auth_dialog.dart';
 import 'package:alura_crashlytics/http/webclients/transaction_webclient.dart';
 import 'package:alura_crashlytics/models/contact.dart';
 import 'package:alura_crashlytics/models/transaction.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:toast/toast.dart';
 import 'package:uuid/uuid.dart';
 
 class TransactionForm extends StatefulWidget {
@@ -23,10 +26,12 @@ class _TransactionFormState extends State<TransactionForm> {
   final TransactionWebClient _webClient = TransactionWebClient();
   final String transactionId = Uuid().v4();
   bool _sending = false;
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
       appBar: AppBar(
         title: Text('New transaction'),
       ),
@@ -136,13 +141,32 @@ class _TransactionFormState extends State<TransactionForm> {
     });
     final Transaction transaction =
     await _webClient.save(transactionCreated, password).catchError((e) {
-      print('Erro aqui: $e');
-      _showFailureMessage(context, message: e.message);
+      if (FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
+        FirebaseCrashlytics.instance.setCustomKey('exception', e.toString());
+        // FirebaseCrashlytics.instance.setCustomKey('http_code', e.);
+        FirebaseCrashlytics.instance.setCustomKey('http_body', transactionCreated.toString());
+        FirebaseCrashlytics.instance.recordError(e.message, null);
+      }
+      _showFailureMessage(context, message: e);
+
     }, test: (e) => e is HttpException).catchError((e) {
-      _showFailureMessage(context,
-          message: 'timeout submitting the transaction');
+      if (FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
+        FirebaseCrashlytics.instance.setCustomKey('exception', e.toString());
+        // FirebaseCrashlytics.instance.setCustomKey('http_code', e.statusCode);
+        FirebaseCrashlytics.instance.setCustomKey('http_body', transactionCreated.toString());
+        FirebaseCrashlytics.instance.recordError(e, null);
+      }
+      _showFailureMessage(context, message: 'timeout submitting the transaction');
+
     }, test: (e) => e is TimeoutException).catchError((e) {
+      if (FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
+        FirebaseCrashlytics.instance.setCustomKey('exception', e.toString());
+        // FirebaseCrashlytics.instance.setCustomKey('http_code', e.statusCode);
+        FirebaseCrashlytics.instance.setCustomKey('http_body', transactionCreated.toString());
+        FirebaseCrashlytics.instance.recordError(e, null);
+      }
       _showFailureMessage(context);
+
     }).whenComplete(() {
       setState(() {
         _sending = false;
@@ -155,10 +179,34 @@ class _TransactionFormState extends State<TransactionForm> {
     BuildContext context, {
     String message = 'Unknown error',
   }) {
+
     showDialog(
-        context: context,
-        builder: (contextDialog) {
-          return FailureDialog(message);
-        });
+      context: context,builder: (_) => NetworkGiffyDialog(
+        image: Image.asset('images/error.gif'),
+        title: Text('Granny Eating Chocolate',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            fontSize: 22.0,
+            fontWeight: FontWeight.w600)),
+            description:Text(message, textAlign: TextAlign.center),
+        entryAnimation: EntryAnimation.TOP,
+        onOkButtonPressed: () {},
+      )
+    );
+
+    // showToast(message, gravity: Toast.BOTTOM);
+
+    // final scackBar = SnackBar(content: Text(message));
+    // _scaffoldkey.currentState.showSnackBar(scackBar);
+  }
+  //   showDialog(
+  //       context: context,
+  //       builder: (contextDialog) {
+  //         return FailureDialog(message);
+  //       });
+  // }
+
+  void showToast(String msg, {int duration = 5, int gravity}) {
+    Toast.show(msg, context, duration: duration, gravity: gravity);
   }
 }
