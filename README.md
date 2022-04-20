@@ -17,3 +17,5 @@ Comunicação HTTP: Flutter com web API (10 horas)</br>
 Firebase Crashlytics, gere relatórios de erro em tempo real (10 horas)</br>
 
 Testes de unidade e Widget com mocks: Boas práticas no Flutter (10 horas)</br>
+
+Flutter Nuvigator: controle de rotas e navegação (10 horas)</br>
