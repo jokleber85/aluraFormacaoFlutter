@@ -108,12 +108,10 @@ class ProducerDetailsScreen extends StatelessWidget {
       final pack = Package.fromJson(package);
 
       children.add(InkWell(
-        onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PackageDetailsScreen(
-            package: pack,
-            producer: producer,
-          )),
+        onTap: () => Navigator.pushNamed(
+          context, 
+          'package-details', 
+          arguments: {'package': pack, 'producer': producer}
         ),
         child: OrgsPackagesCard(
           title: pack.title,
