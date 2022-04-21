@@ -5,9 +5,9 @@ Formação Flutter</br>
 Flutter: Push Notifications com Firebase Cloud Messaging (10 horas)
 ## <br />
 
-[Projeto Original API](https://github.com/alura-cursos/dev-meetups-api)
-[Projeto Original APP](https://github.com/alura-cursos/flutter-notifications/tree/main)
-[Projeto Original WEB](https://github.com/alura-cursos/flutter-notifications/tree/aula_4)
+[Projeto Original API](https://github.com/alura-cursos/dev-meetups-api)</br>
+[Projeto Original APP](https://github.com/alura-cursos/flutter-notifications/tree/main)</br>
+[Projeto Original WEB](https://github.com/alura-cursos/flutter-notifications/tree/aula_4)</br>
 
 
 Iniciar API:
