@@ -21,3 +21,5 @@ Testes de unidade e Widget com mocks: Boas práticas no Flutter (10 horas)</br>
 Flutter Nuvigator: controle de rotas e navegação (10 horas)</br>
 
 Flutter: Push Notifications com Firebase Cloud Messaging (10 horas)</br>
+
+Flutter: gerenciamento de estados com Provider (08 horas)</br>
