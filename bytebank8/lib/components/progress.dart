@@ -24,3 +24,18 @@ class Progress extends StatelessWidget {
     );
   }
 }
+
+class ProgressView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Processing'),
+      ),
+      body: Progress(
+        message: 'Sending...',
+      ),
+    ); 
+  }
+}
