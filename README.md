@@ -23,3 +23,5 @@ Flutter Nuvigator: controle de rotas e navegação (10 horas)</br>
 Flutter: Push Notifications com Firebase Cloud Messaging (10 horas)</br>
 
 Flutter: gerenciamento de estados com Provider (08 horas)</br>
+
+Flutter: Streams de programação reativa com BLoC (08 horas)</br>
