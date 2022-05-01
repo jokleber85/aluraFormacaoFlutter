@@ -25,3 +25,5 @@ Flutter: Push Notifications com Firebase Cloud Messaging (10 horas)</br>
 Flutter: gerenciamento de estados com Provider (08 horas)</br>
 
 Flutter: Streams de programação reativa com BLoC (08 horas)</br>
+
+Flutter i18n: entenda abordagens de internacionalização (08 horas)</br>
